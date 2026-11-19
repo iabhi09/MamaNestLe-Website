@@ -1,4 +1,4 @@
-const CONFIG={whatsappNumber:"918178903102",appsScriptUrl:"ADD_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE"};
+const CONFIG={whatsappNumber:"918178903102",appsScriptUrl:"https://script.google.com/macros/s/AKfycbyUcMkFrvlBovl-OzlwM_b8LYy31I1hR02o_xk17W9XTohWviycXhLEA8vvtJacff2b/exec"};
 const menuButton=document.querySelector(".menu-toggle");
 const navLinks=document.querySelector(".nav-links");
 menuButton?.addEventListener("click",()=>{const open=navLinks.classList.toggle("open");menuButton.setAttribute("aria-expanded",String(open));menuButton.setAttribute("aria-label",open?"Close navigation":"Open navigation");menuButton.textContent=open?"×":"☰";});
@@ -23,7 +23,7 @@ form?.addEventListener("submit",event=>{
 });
 window.addEventListener("message",event=>{
  const data=event.data;
- if(!data||data.type!=="mamanestle-enquiry-response")return;
+ if(!data||data.type!=="mamanestle-enquiry-response"||!["https://script.google.com","https://script.googleusercontent.com"].includes(event.origin))return;
  pending=false;form?.classList.remove("is-submitting");
  const button=form?.querySelector('button[type="submit"]');if(button)button.querySelector("span:first-child").textContent="Send private enquiry";
  if(data.ok){
