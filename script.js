@@ -8,6 +8,7 @@ const form=document.getElementById("enquiry-form");
 const status=document.getElementById("form-status");
 const frame=document.getElementById("enquiry-response");
 let pending=false;
+let acknowledgementTimer=null;
 form?.addEventListener("submit",event=>{
  event.preventDefault();
  if(!form.reportValidity()||pending)return;
@@ -16,16 +17,28 @@ form?.addEventListener("submit",event=>{
   status.textContent="The private enquiry connection is not activated yet. Please contact us on WhatsApp for now.";
   return;
  }
- pending=true;form.classList.add("is-submitting");
- const button=form.querySelector('button[type="submit"]');if(button)button.querySelector("span:first-child").textContent="Sending your enquiry…";
+ pending=true;
+ form.classList.add("is-submitting");
+ const button=form.querySelector('button[type="submit"]');
+ if(button)button.querySelector("span:first-child").textContent="Sending your enquiry…";
  status.textContent="Sending securely to the private MamaNestLe enquiry system…";
+ acknowledgementTimer=setTimeout(()=>{
+  if(!pending)return;
+  pending=false;
+  form.classList.remove("is-submitting");
+  if(button)button.querySelector("span:first-child").textContent="Send private enquiry";
+  status.textContent="Your enquiry may have been received, but confirmation is taking longer than expected. Please check with us on WhatsApp before submitting again.";
+ },20000);
  form.submit();
 });
 window.addEventListener("message",event=>{
  const data=event.data;
- if(!data||data.type!=="mamanestle-enquiry-response"||!["https://script.google.com","https://script.googleusercontent.com"].includes(event.origin))return;
- pending=false;form?.classList.remove("is-submitting");
- const button=form?.querySelector('button[type="submit"]');if(button)button.querySelector("span:first-child").textContent="Send private enquiry";
+ if(!data||data.type!=="mamanestle-enquiry-response"||event.source!==frame?.contentWindow)return;
+ if(acknowledgementTimer)clearTimeout(acknowledgementTimer);
+ pending=false;
+ form?.classList.remove("is-submitting");
+ const button=form?.querySelector('button[type="submit"]');
+ if(button)button.querySelector("span:first-child").textContent="Send private enquiry";
  if(data.ok){
   status.textContent="Thank you. Your enquiry has been received. Our team will be in touch.";
   form?.reset();
