@@ -1,7 +1,7 @@
 // MamaNestLe website configuration. Replace these placeholders after setup.
 const CONFIG = {
   googleScriptUrl: "ADD_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE",
-  whatsappNumber: "ADD_WHATSAPP_BUSINESS_NUMBER_HERE" // international digits only, e.g. 91XXXXXXXXXX
+  whatsappNumber: "918178903102" // international digits only, e.g. 91XXXXXXXXXX
 };
 
 const menuButton = document.querySelector(".menu-toggle");
