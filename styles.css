@@ -71,3 +71,38 @@
   .hero-photo-wrap:before{inset:0 20px 18px 0}
   .image-break:after{background:linear-gradient(90deg,rgba(245,241,229,.86),rgba(245,241,229,.48))}
 }
+
+
+/* Luxury editorial image palette + enquiry form refinements */
+.hero-photo,.image-break>img{
+  filter:brightness(1.13) saturate(.58) contrast(.86) sepia(.08);
+}
+.hero-photo-wrap{isolation:isolate}
+.hero-photo-wrap:before{
+  content:"";position:absolute;inset:0 28px 25px 0;z-index:1;
+  background:linear-gradient(145deg,rgba(248,245,235,.25),rgba(213,219,199,.13));
+  border-radius:48% 48% 4px 4px;pointer-events:none;mix-blend-mode:screen;
+}
+.image-break{background:#e9e8dc}
+.image-break:after{
+  background:linear-gradient(90deg,rgba(247,245,237,.94) 0%,rgba(247,245,237,.77) 48%,rgba(247,245,237,.10) 100%);
+}
+.image-break-copy{color:#344331}
+.image-break-copy .eyebrow{color:#78856d}
+.image-break-copy h2 em{color:#718064}
+.whatsapp-card{display:block}
+.wa-card-top{display:flex;align-items:center;gap:12px}
+.whatsapp-card .wa-symbol{display:grid;place-items:center;flex:none}
+.whatsapp-card .wa-kicker{display:block}
+.form-field input[type=email]{width:100%}
+.consent-row{display:flex;align-items:flex-start;gap:11px;margin:22px 0 0;font-size:10px;line-height:1.65;font-weight:400;color:#72766b}
+.consent-row input{width:16px;height:16px;flex:none;margin:2px 0 0;accent-color:#526447}
+.consent-row a,.form-whatsapp a{color:#526447;text-decoration:underline;text-underline-offset:3px;font-weight:700}
+.form-whatsapp{font-size:10px;text-align:center;color:#777b70;margin:13px 0 0}
+.form-response-frame{position:absolute;width:1px;height:1px;border:0;opacity:0;pointer-events:none}
+.contact-form.is-submitting .submit-button{opacity:.65;pointer-events:none}
+.form-footnote{min-height:18px}
+@media(max-width:700px){
+ .hero-photo-wrap:before{inset:0 20px 18px 0}
+ .image-break:after{background:linear-gradient(90deg,rgba(247,245,237,.92),rgba(247,245,237,.60))}
+}
