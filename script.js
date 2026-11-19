@@ -1,8 +1,35 @@
-const CONFIG={whatsappNumber:"918178903102"};
+const CONFIG={whatsappNumber:"918178903102",appsScriptUrl:"ADD_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE"};
 const menuButton=document.querySelector(".menu-toggle");
 const navLinks=document.querySelector(".nav-links");
 menuButton?.addEventListener("click",()=>{const open=navLinks.classList.toggle("open");menuButton.setAttribute("aria-expanded",String(open));menuButton.setAttribute("aria-label",open?"Close navigation":"Open navigation");menuButton.textContent=open?"×":"☰";});
 navLinks?.querySelectorAll("a").forEach(link=>link.addEventListener("click",()=>{navLinks.classList.remove("open");menuButton?.setAttribute("aria-expanded","false");if(menuButton){menuButton.textContent="☰";menuButton.setAttribute("aria-label","Open navigation");}}));
 const year=document.getElementById("year");if(year)year.textContent=new Date().getFullYear();
 const form=document.getElementById("enquiry-form");
-form?.addEventListener("submit",event=>{event.preventDefault();if(!form.reportValidity())return;if(document.getElementById("website")?.value)return;const name=document.getElementById("name").value.trim();const interest=document.getElementById("interest").value;const message=document.getElementById("message").value.trim();const body=["Hello MamaNestLe,","My name is "+name+".","I am reaching out as: "+interest+".",message?"A little more about my enquiry: "+message:""].filter(Boolean).join("\n");window.open("https://wa.me/"+CONFIG.whatsappNumber+"?text="+encodeURIComponent(body),"_blank","noopener");});
+const status=document.getElementById("form-status");
+const frame=document.getElementById("enquiry-response");
+let pending=false;
+form?.addEventListener("submit",event=>{
+ event.preventDefault();
+ if(!form.reportValidity()||pending)return;
+ if(document.getElementById("website")?.value)return;
+ if(!CONFIG.appsScriptUrl||CONFIG.appsScriptUrl.includes("ADD_GOOGLE_APPS_SCRIPT")){
+  status.textContent="The private enquiry connection is not activated yet. Please contact us on WhatsApp for now.";
+  return;
+ }
+ pending=true;form.classList.add("is-submitting");
+ const button=form.querySelector('button[type="submit"]');if(button)button.querySelector("span:first-child").textContent="Sending your enquiry…";
+ status.textContent="Sending securely to the private MamaNestLe enquiry system…";
+ form.submit();
+});
+window.addEventListener("message",event=>{
+ const data=event.data;
+ if(!data||data.type!=="mamanestle-enquiry-response")return;
+ pending=false;form?.classList.remove("is-submitting");
+ const button=form?.querySelector('button[type="submit"]');if(button)button.querySelector("span:first-child").textContent="Send private enquiry";
+ if(data.ok){
+  status.textContent="Thank you. Your enquiry has been received. Our team will be in touch.";
+  form?.reset();
+ }else{
+  status.textContent="We couldn't save your enquiry just now. Please contact us directly on WhatsApp.";
+ }
+});
