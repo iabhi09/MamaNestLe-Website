@@ -106,3 +106,15 @@
  .hero-photo-wrap:before{inset:0 20px 18px 0}
  .image-break:after{background:linear-gradient(90deg,rgba(247,245,237,.92),rgba(247,245,237,.60))}
 }
+
+/* Mobile-first enquiry form reliability */
+@media(max-width:700px){
+ .connect-grid,.contact-form,.form-field{min-width:0;width:100%;}
+ .contact-form{padding:26px 18px;}
+ .form-field input,.form-field select,.form-field textarea{width:100%;min-width:0;font-size:16px;line-height:1.45;}
+ .consent-row{align-items:flex-start;gap:10px;}
+ .consent-row span{min-width:0;}
+ .submit-button{min-height:56px;width:100%;touch-action:manipulation;}
+ .form-response-frame{position:absolute;width:1px;height:1px;left:0;bottom:0;}
+}
+@media(max-width:390px){.contact-form{padding:23px 15px;}.form-top h3{font-size:27px;}}
