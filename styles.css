@@ -118,3 +118,22 @@
  .form-response-frame{position:absolute;width:1px;height:1px;left:0;bottom:0;}
 }
 @media(max-width:390px){.contact-form{padding:23px 15px;}.form-top h3{font-size:27px;}}
+
+
+/* Final layout polish: navigation, WhatsApp contact and social footer */
+.nav-links{gap:clamp(18px,2.4vw,34px)}
+.nav-links>a{white-space:nowrap}
+.whatsapp-card{width:100%;max-width:410px}
+.wa-direct-link{width:100%;min-width:0;justify-content:flex-start}
+.wa-direct-link>span:last-child{min-width:0}
+.footer-social{display:flex;align-items:center;justify-content:flex-end;gap:18px;flex-wrap:wrap}
+.footer-social>span:first-child{font-size:8px;letter-spacing:1.4px;color:#858a7a;font-weight:700}
+.footer-social .footer-contact{white-space:nowrap}
+.social-link-pending{font-size:9px;color:#777d70}
+@media(max-width:700px){
+ .nav-links{gap:17px}
+ .footer-social{width:100%;justify-content:flex-start;gap:14px}
+ .footer-main{align-items:flex-start}
+ .footer-social>span:first-child{width:100%}
+ .whatsapp-card{max-width:none}
+}
